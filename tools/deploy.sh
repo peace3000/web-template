@@ -83,7 +83,7 @@ setup_gh() {
 
 backup() {
   mv "$SITE_DIR"/* "$_backup_dir"
-  mv .git "$_backup_dir"
+  mv .git .nojekyll "$_backup_dir"
 
   # When adding custom domain from Github website,
   # the CANME only exist on `gh-pages` branch
@@ -134,25 +134,25 @@ main() {
 while (($#)); do
   opt="$1"
   case $opt in
-    -c | --config)
-      _config="$2"
-      shift
-      shift
-      ;;
-    --dry-run)
-      # build & test, but not deploy
-      _opt_dry_run=true
-      shift
-      ;;
-    -h | --help)
-      help
-      exit 0
-      ;;
-    *)
-      # unknown option
-      help
-      exit 1
-      ;;
+  -c | --config)
+    _config="$2"
+    shift
+    shift
+    ;;
+  --dry-run)
+    # build & test, but not deploy
+    _opt_dry_run=true
+    shift
+    ;;
+  -h | --help)
+    help
+    exit 0
+    ;;
+  *)
+    # unknown option
+    help
+    exit 1
+    ;;
   esac
 done
 
